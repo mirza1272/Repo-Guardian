@@ -33,16 +33,8 @@ Below is the diagram showing the Agentic AI workflow (nodes, edges, and graphs):
 
 ![Workflow Diagram](assets/image1.png)
 
----
 
-## 🎬 Demo Video
-Watch Repo Guardian in action:
 
-![Repo Guardian Video](assets/repo_guardian.mp4)
-
-*(If the video player does not load, you can view or download the raw video [here](https://github.com/mirza1272/Repo-Guardian/raw/main/assets/repo_guardian.mp4).)*
-
----
 
 ## ⚠️ Important Rules & Limitations
 
@@ -159,7 +151,7 @@ git push origin main
 * `requirements.txt` — The list of libraries needed.
 * `.env.example` — Configuration template.
 * `src/` — Folder containing the Python files.
-* `assets/` — Folder containing the workflow image (`image1.png`) and demo video (`repo_guardian.mp4`).
+* `assets/` — Folder to place your workflow diagram image (e.g. `image1.png`).
 
 ---
 
