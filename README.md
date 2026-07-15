@@ -38,7 +38,7 @@ Below is the diagram showing the Agentic AI workflow (nodes, edges, and graphs):
 ## 🎬 Demo Video
 Watch Repo Guardian in action:
 
-<video src="assets/repo_guardian.mp4" width="100%" controls></video>
+<video src="https://github.com/mirza1272/Repo-Guardian/raw/main/assets/repo_guardian.mp4" width="100%" controls></video>
 
 ---
 
