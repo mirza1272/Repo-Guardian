@@ -150,7 +150,7 @@ git push origin main
 * `requirements.txt` — The list of libraries needed.
 * `.env.example` — Configuration template.
 * `src/` — Folder containing the Python files.
-* `assets/` — Folder to place your workflow diagram image (e.g. `image1.jpg`).
+* `assets/` — Folder to place your workflow diagram image (e.g. `image1.png`).
 
 ---
 
