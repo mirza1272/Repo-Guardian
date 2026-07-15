@@ -31,7 +31,7 @@ Every night at 11:30 PM (Pakistan Time)
 ## 🎨 Workflow Diagram
 Below is the diagram showing the Agentic AI workflow (nodes, edges, and graphs):
 
-![Workflow Diagram](assets/image1.jpg)
+![Workflow Diagram](assets/image1.png)
 
 ---
 

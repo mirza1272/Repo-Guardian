@@ -7,9 +7,9 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-LOG_START_MARKER = "<!-- STREAK_AGENT_LOG_START -->"
-LOG_END_MARKER = "<!-- STREAK_AGENT_LOG_END -->"
-PLACEHOLDER_LINE = "_No automated development entries yet._"
+LOG_START_MARKER = "STREAK_AGENT_LOG_START"
+LOG_END_MARKER = "STREAK_AGENT_LOG_END"
+PLACEHOLDER_LINE = "No automated development entries yet"
 
 _ENTRY_RE = re.compile(r"^- \d{4}-\d{2}-\d{2}: .+$")
 
