@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.backends.legacy:build"
 
 [project]
-name = "github-streak-backup-agent"
+name = "repo-guardian"
 version = "1.0.0"
 description = "Scheduled AI-powered development-log backup for one GitHub repository"
 readme = "README.md"

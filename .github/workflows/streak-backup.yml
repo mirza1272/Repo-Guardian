@@ -1,4 +1,4 @@
-name: GitHub Streak Backup Agent
+name: Repo Guardian
 
 on:
   schedule:
