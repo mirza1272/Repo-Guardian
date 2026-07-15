@@ -1,0 +1,89 @@
+name: GitHub Streak Backup Agent
+
+on:
+  schedule:
+    - cron: "30 18 * * *"  # 23:30 Asia/Karachi (UTC+5)
+  workflow_dispatch:
+
+concurrency:
+  group: streak-backup-${{ github.repository }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  streak-backup:
+    name: Check and update development log
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      TIMEZONE: Asia/Karachi
+      TARGET_FILE: README.md
+      MAX_LOG_WORDS: "18"
+      DRY_RUN: "false"
+      TZ: Asia/Karachi
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      GROQ_MODEL: ${{ vars.GROQ_MODEL || 'llama-3.3-70b-versatile' }}
+      GIT_AUTHOR_NAME: ${{ vars.GIT_AUTHOR_NAME || 'Streak Agent' }}
+      GIT_AUTHOR_EMAIL: ${{ vars.GIT_AUTHOR_EMAIL || '' }}
+      LOG_LEVEL: INFO
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run streak backup agent
+        run: python run_agent.py
+
+      - name: Check for README changes
+        id: check_changes
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes to README.md."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "README.md updated."
+          fi
+
+      - name: Configure Git identity
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name  "${GIT_AUTHOR_NAME:-Streak Agent}"
+          git config user.email "${GIT_AUTHOR_EMAIL}"
+
+      - name: Stage README.md
+        if: steps.check_changes.outputs.changed == 'true'
+        run: git add -- README.md
+
+      - name: Commit README update
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          DATE=$(date -u +"%Y-%m-%d")
+          git commit --message "docs(streak-agent): update development log for ${DATE}"
+
+      - name: Push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: git push
+
+      - name: Report result
+        if: always()
+        run: |
+          if [ "${{ steps.check_changes.outputs.changed }}" = "true" ]; then
+            echo "✓ Development log updated and pushed."
+          else
+            echo "✓ No update needed today."
+          fi
