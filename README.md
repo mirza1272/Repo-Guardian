@@ -2,14 +2,14 @@
 
 > [!NOTE]
 > Ever forgot to push your code and lost your GitHub streak? **Repo Guardian** is your friendly backup helper! 
-> It automatically runs every night at **11:30 PM Pakistan time** to protect your streak.
+> It automatically runs every night before midnight (around 11:00 PM - 11:30 PM Pakistan time) to protect your streak.
 
 ---
 
 ## 📊 How It Works (Step-by-Step Flow)
 
 ```
-Every night at 11:30 PM (Pakistan Time)
+Every night before midnight (Pakistan Time)
                  │
                  ▼
      Did you push code today?

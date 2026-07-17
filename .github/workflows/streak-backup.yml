@@ -2,7 +2,7 @@ name: Repo Guardian
 
 on:
   schedule:
-    - cron: "30 18 * * *"  # 23:30 Asia/Karachi (UTC+5)
+    - cron: "15 17 * * *"  # Scheduled for 22:15 PKT (Karachi). Will run around 23:00 - 23:30 PKT due to GitHub Actions delays.
   workflow_dispatch:
 
 concurrency:
