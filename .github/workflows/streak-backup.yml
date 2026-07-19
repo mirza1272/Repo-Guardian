@@ -28,6 +28,7 @@ jobs:
       GROQ_MODEL: ${{ vars.GROQ_MODEL || 'llama-3.3-70b-versatile' }}
       GIT_AUTHOR_NAME: ${{ vars.GIT_AUTHOR_NAME || 'Streak Agent' }}
       GIT_AUTHOR_EMAIL: ${{ vars.GIT_AUTHOR_EMAIL || '' }}
+      USERNAME: ${{ vars.USERNAME || '' }}
       LOG_LEVEL: INFO
 
     steps:
