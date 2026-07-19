@@ -80,6 +80,20 @@ class StreakAgent:
         date_str = self._today()
         logger.info("Date (%s): %s", cfg.timezone.key, date_str)
 
+        if not self._force:
+            username = cfg.github_username or self._git.get_github_username()
+            if username:
+                logger.info("Checking global GitHub contributions for user: %s", username)
+                try:
+                    if self._has_github_contributions_today(username, date_str):
+                        msg = f"Contributions already exist on GitHub today for {username} — nothing to do."
+                        logger.info(msg)
+                        return AgentResult(success=True, exit_code=EXIT_SUCCESS, message=msg)
+                except Exception as exc:
+                    logger.warning("Failed to check global GitHub contributions: %s. Falling back to local check.", exc)
+            else:
+                logger.warning("Could not determine GitHub username. Falling back to local check.")
+
         if not self._force and cfg.git_author_email:
             if self._git.has_genuine_user_commit_today(cfg.git_author_email, tz):
                 msg = f"Genuine commit already exists for {date_str} — nothing to do."
@@ -143,6 +157,38 @@ class StreakAgent:
             message=f"README updated — {proposed_entry}",
             proposed_entry=sentence, readme_changed=True,
         )
+
+    def _has_github_contributions_today(self, username: str, date_str: str) -> bool:
+        import urllib.request
+        import re
+
+        url = f"https://github.com/users/{username}/contributions"
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/91.0.4472.124 Safari/537.36"
+            )
+        }
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=10) as response:
+            html = response.read().decode('utf-8')
+
+        match = re.search(r'<td[^>]*data-date="' + re.escape(date_str) + r'"[^>]*>', html)
+        if not match:
+            logger.warning("Date %s not found in GitHub contributions graph.", date_str)
+            return False
+
+        td_tag = match.group(0)
+        level_match = re.search(r'data-level="([^"]+)"', td_tag)
+        if level_match:
+            try:
+                level = int(level_match.group(1))
+                logger.info("GitHub contribution level for %s is %d", date_str, level)
+                return level > 0
+            except ValueError:
+                pass
+        return False
 
     @staticmethod
     def _show_diff(original: str, updated: str) -> None:

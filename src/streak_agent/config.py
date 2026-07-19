@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 @dataclass(frozen=True)
@@ -23,6 +23,7 @@ class AgentConfig:
     max_log_words: int
     dry_run: bool
     log_level: str
+    github_username: str
 
     agent_commit_prefix: str = field(default="docs(streak-agent):", init=False, compare=False)
     max_readme_context_chars: int = field(default=4_000, init=False, compare=False)
@@ -82,6 +83,12 @@ def load_config() -> AgentConfig:
             "GIT_AUTHOR_EMAIL is not set — commit detection won't work correctly."
         )
 
+    github_username = (
+        os.environ.get("USERNAME", "").strip()
+        or os.environ.get("GH_USERNAME", "").strip()
+        or os.environ.get("GITHUB_USERNAME", "").strip()
+    )
+
     cfg = AgentConfig(
         groq_api_key=groq_api_key,
         groq_model=groq_model,
@@ -92,6 +99,7 @@ def load_config() -> AgentConfig:
         max_log_words=max_log_words,
         dry_run=dry_run,
         log_level=log_level,
+        github_username=github_username,
     )
     logger.debug(
         "Config: model=%s tz=%s file=%s dry_run=%s",

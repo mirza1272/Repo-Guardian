@@ -196,3 +196,15 @@ class GitService:
     def get_current_branch(self) -> str:
         result = _run(["git", "branch", "--show-current"], cwd=self._root)
         return result.stdout.strip()
+
+    def get_github_username(self) -> str | None:
+        try:
+            result = _run(["git", "remote", "get-url", "origin"], cwd=self._root)
+            url = result.stdout.strip()
+            if "github.com" in url:
+                parts = url.split("github.com")[-1].lstrip(":").lstrip("/").split("/")
+                if len(parts) >= 2:
+                    return parts[0]
+        except GitError:
+            pass
+        return None
