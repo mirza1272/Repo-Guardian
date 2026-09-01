@@ -2,7 +2,8 @@ name: Repo Guardian
 
 on:
   schedule:
-    - cron: "30 16 * * *"  # Scheduled for 21:30 PKT (Karachi). Will run around 23:00 - 23:30 PKT due to GitHub Actions delays.
+    - cron: "35 14 * * *"  # Primary: 19:35 PKT (7:35 PM Karachi)
+    - cron: "45 16 * * *"  # Backup: 21:45 PKT (9:45 PM Karachi)
   workflow_dispatch:
 
 concurrency:
@@ -73,7 +74,7 @@ jobs:
       - name: Commit README update
         if: steps.check_changes.outputs.changed == 'true'
         run: |
-          DATE=$(date -u +"%Y-%m-%d")
+          DATE=$(date +"%Y-%m-%d")
           git commit --message "docs(streak-agent): update development log for ${DATE}"
 
       - name: Push changes
