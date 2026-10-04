@@ -162,6 +162,7 @@ git push origin main
 ## Automated Development Log
 
 <!-- STREAK_AGENT_LOG_START -->
+- 2026-10-04: Added note in README about correct timezone handling to avoid future schedule confusion.
 - 2026-10-02: Organized README sections for clearer setup instructions and added notes on environment activation.
 - 2026-09-25: Reviewed and refined streak-backup.yml to ensure correct schedule alignment.
 - 2026-09-24: Reviewed recent accidental push removals and updated documentation accordingly.
