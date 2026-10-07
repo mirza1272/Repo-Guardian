@@ -162,6 +162,7 @@ git push origin main
 ## Automated Development Log
 
 <!-- STREAK_AGENT_LOG_START -->
+- 2026-10-07: Enhanced README with detailed environment activation guide and added a troubleshooting section for backup issues.
 - 2026-10-06: Reviewed README timing notes and clarified schedule details for Pakistan midnight backup.
 - 2026-10-04: Added note in README about correct timezone handling to avoid future schedule confusion.
 - 2026-10-02: Organized README sections for clearer setup instructions and added notes on environment activation.
