@@ -2,7 +2,7 @@ name: Repo Guardian
 
 on:
   schedule:
-    - cron: "0 13 * * *"  # Primary: 18:00 PKT (6:00 PM Karachi)
+    - cron: "30 11 * * *"  # Primary: 16:30 PKT (4:30 PM Karachi)
   workflow_dispatch:
 
 concurrency:
