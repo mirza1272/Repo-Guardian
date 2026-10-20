@@ -162,6 +162,7 @@ git push origin main
 ## Automated Development Log
 
 <!-- STREAK_AGENT_LOG_START -->
+- 2026-10-20: Reviewed and clarified the local dry-run testing instructions in the README.
 - 2026-10-19: Reviewed progress on accidental push on 13/10/26 agent run on 1:22 am.
 - 2026-10-18: Adjusted backup cron timing to 6 PM to mitigate accidental early pushes.
 - 2026-10-07: Enhanced README with detailed environment activation guide and added a troubleshooting section for backup issues.
