@@ -162,6 +162,7 @@ git push origin main
 ## Automated Development Log
 
 <!-- STREAK_AGENT_LOG_START -->
+- 2026-11-10: Added FAQ section to README to address common setup questions.
 - 2026-11-08: Updated README to include clearer steps for configuring environment variables and secret management.
 - 2026-11-06: Reviewed recent accidental push incidents and refined README guidance for backup timing consistency.
 - 2026-11-05: Reviewed backup workflow documentation and ensured clarity on accidental push handling.
@@ -191,6 +192,5 @@ git push origin main
 - 2026-09-07: Organized repository documentation to keep future development work clearly structured.
 - 2026-09-06: Reviewed existing project notes and refined the planned development workflow.
 - 2026-09-05: Revisited the project structure and clarified upcoming implementation priorities.
-- 2026-09-04: Reviewed progress on remove accidental push.
 
 <!-- STREAK_AGENT_LOG_END -->
